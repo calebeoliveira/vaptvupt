@@ -1,0 +1,1 @@
+var vv = angular.module('vaptvupt', ['ui.router']);

@@ -1,0 +1,14 @@
+{
+  "name": "vaptvupt",
+  "version": "0.0.1",
+  "description": "App conceito para pedidos em lanchonetes",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Calebe Oliveira <becalebe@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
+  }
+}
