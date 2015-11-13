@@ -1,11 +1,12 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var stylus = require('gulp-stylus');
 
-gulp.task('css', function() {
+gulp.task('stylus', function() {
 	return gulp.src([
-			'resources/css/*.css'
+			'resources/stylus/index.styl'
 		])
-		.pipe(concat('resources.css'))
+		.pipe(stylus())
 		.pipe(gulp.dest('public/css'));
 });
 
@@ -29,13 +30,13 @@ gulp.task('views', function() {
 });
 
 gulp.task('default', [
-	'css',
+	'stylus',
 	'angular-app',
 	'views'
 ]);
 
 gulp.task('watch', ['default'], function() {
-	gulp.watch(['resources/css/*.css'], ['css']);
+	gulp.watch(['resources/stylus/*.styl'], ['stylus']);
 	gulp.watch(['resources/angular/**/*.js'], ['angular-app']);
 	gulp.watch(['resources/angular/views/*.html'], ['views']);
 });
