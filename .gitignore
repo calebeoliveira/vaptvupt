@@ -1,7 +1,4 @@
 /vendor
-/public/css
-/public/js
-/public/views
 /bower_components
 /node_modules
 .env

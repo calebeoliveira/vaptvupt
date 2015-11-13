@@ -11,7 +11,7 @@
 	<div class="navbar-fixed">
 		<nav class="red darken-4">
 			<div class="nav-wrapper">
-			<a href="#" class="brand-logo"><i class="material-icons brand-icon">repeat_one</i>
+			<a href="#" class="brand-logo amber-text"><i class="material-icons brand-icon">store</i>
 			Vaptvupt</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down">

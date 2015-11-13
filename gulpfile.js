@@ -29,14 +29,23 @@ gulp.task('views', function() {
 		.pipe(gulp.dest('public/views'));
 });
 
+gulp.task('images', function() {
+	return gulp.src([
+		'resources/images/*'
+	])
+	.pipe(gulp.dest('public/images'));
+});
+
 gulp.task('default', [
 	'stylus',
 	'angular-app',
-	'views'
+	'views',
+	'images'
 ]);
 
 gulp.task('watch', ['default'], function() {
 	gulp.watch(['resources/stylus/*.styl'], ['stylus']);
 	gulp.watch(['resources/angular/**/*.js'], ['angular-app']);
 	gulp.watch(['resources/angular/views/*.html'], ['views']);
+	gulp.watch(['resources/images/*'], ['images']);
 });
