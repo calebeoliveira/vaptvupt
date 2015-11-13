@@ -39,5 +39,6 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript">$('.button-collapse').sideNav();</script>
 </body>
 </html>
