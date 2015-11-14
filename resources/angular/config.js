@@ -22,11 +22,5 @@ vv.config(function($stateProvider, $urlRouterProvider) {
 		url: '/menu',
 		templateUrl: '/views/menu.html',
 		controller: 'MenuCtrl'
-	})
-
-	.state('report', {
-		url: '/report',
-		templateUrl: '/views/report.html',
-		controller: 'ReportCtrl'
 	});
 });

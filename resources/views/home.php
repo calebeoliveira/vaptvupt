@@ -18,13 +18,11 @@
 					<li><a href="#/sell">Vender</a></li>
 					<li><a href="#/orders">Pedidos</a></li>
 					<li><a href="#/menu">Cardápio</a></li>
-					<li><a href="#/report">Relatório</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
 					<li><a href="#/sell">Vender</a></li>
 					<li><a href="#/orders">Pedidos</a></li>
 					<li><a href="#/menu">Cardápio</a></li>
-					<li><a href="#/report">Relatório</a></li>
 				</ul>
 			</div>
 		</nav>
