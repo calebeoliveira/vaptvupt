@@ -14,6 +14,7 @@ gulp.task('angular-app', function() {
 	return gulp.src([
 			'resources/angular/run.js',
 			'resources/angular/config.js',
+			'resources/angular/directives/*.js',
 			'resources/angular/factories/*.js',
 			'resources/angular/services/*.js',
 			'resources/angular/controllers/*.js'
@@ -36,11 +37,20 @@ gulp.task('images', function() {
 	.pipe(gulp.dest('public/images'));
 });
 
+gulp.task('scripts', function() {
+	return gulp.src([
+		'resources/js/*.js'
+	])
+	.pipe(concat('scripts.js'))
+	.pipe(gulp.dest('public/js'));
+});
+
 gulp.task('default', [
 	'stylus',
 	'angular-app',
 	'views',
-	'images'
+	'images',
+	'scripts'
 ]);
 
 gulp.task('watch', ['default'], function() {
@@ -48,4 +58,5 @@ gulp.task('watch', ['default'], function() {
 	gulp.watch(['resources/angular/**/*.js'], ['angular-app']);
 	gulp.watch(['resources/angular/views/*.html'], ['views']);
 	gulp.watch(['resources/images/*'], ['images']);
+	gulp.watch(['resources/js/*.js'], ['scripts']);
 });

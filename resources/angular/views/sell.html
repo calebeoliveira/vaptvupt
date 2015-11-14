@@ -1,20 +1,21 @@
-<h4><i class="material-icons">shopping_basket</i> Caixa</h4>
+<h4><i class="material-icons">shopping_basket</i> Caixa{{orderItems.length == 0 ? ' livre':''}}</h4>
 <div class="row">
 	<div class="col m6">
 		<div class="fake-label">
 			Itens adicionados
 		</div>
 		<ul class="collection">
-			<li class="collection-item">
+			<li class="collection-item" ng-repeat="item in orderItems">
 				<div>
-					Muqueca de camarão
+					{{item.name}}
 					<div class="secondary-content">
-						<span class="left padding-5px-right amber-text">(1x) R$30,00</span>
-						<a href="#!"><i class="material-icons red-text">delete</i></a>
+						<span class="left padding-5px-right amber-text">({{item.quantity}}x) {{item.price | finance:'R$'}}</span>
+						<a href="javascript: void(0);" ng-click="deleteItem($index)"><i class="material-icons red-text">delete</i></a>
 					</div>
 				</div>
 			</li>
 		</ul>
+		<p class="center grey-text" ng-show="orderItems.length == 0"><strong>Acrescente um item para começar!</strong></p>
 	</div>
 	<div class="col m6">
 		<div class="card-panel bg-money">
@@ -22,32 +23,40 @@
 				<div class="col m12">VALOR TOTAL:</div>
 			</div>
 			<div class="row">
-				<div class="col m12"><h3><sup class="sell-price">R$</sup>30,00</h3></div>
+				<div class="col m12"><h3><sup class="sell-price">R$</sup>{{amount | finance:''}}</h3></div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col m10">
 				<div class="input-field col s12">
-					<select>
-						<option value="1">Muqueca de camarão (R$30,00)</option>
-						<option value="2">Poção de arroz (R$3,00)</option>
-						<option value="3">Coca cola 2L (R$4,50)</option>
-						<option value="4">Suco de fruta 1L (R$3,00)</option>
+					<select ng-model="selectedProduct" material-select watch>
+						<option ng-repeat="value in products" value="{{value}}">{{value.name}} ({{value.price | finance:'R$'}})</option>
 					</select>
 					<label>Acrescentar item</label>
 				</div>
 			</div>
 			<div class="col m2">
-				<a class="btn-floating btn-large waves-effect waves-light red darken-4 add-cart"><i class="material-icons">add</i></a>
+				<a class="btn-floating btn-large waves-effect waves-light red darken-4 add-cart" ng-click="addItem()"><i class="material-icons">add</i></a>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" ng-hide="orderItems.length == 0">
 			<div class="col m6">
-				<a class="waves-effect waves-red btn-flat cancel">cancelar pedido</a>
+				<a class="waves-effect waves-red btn-flat cancel" ng-click="clearOrder()">cancelar pedido</a>
 			</div>
 			<div class="col m6">
-				<a class="waves-effect waves-light btn-large red darken-4 width-100"><i class="material-icons right">thumb_up</i>finalizar</a>
+				<a class="waves-effect waves-light btn-large red darken-4 width-100" href="#confirmModal" modal><i class="material-icons right">thumb_up</i>finalizar</a>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <h4>Finalizar o pedido?</h4>
+        <p>Total: {{amount | finance:'R$'}}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="finishOrder()">finalizar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">cancelar</a>
+    </div>
 </div>
