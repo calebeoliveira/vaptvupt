@@ -1,19 +1,16 @@
 <h4><i class="material-icons">assignment</i> Pedidos</h4>
 <div class="row">
 	<div class="col m4">
-		<div class="card small">
+		<div class="card small" ng-repeat="order in orders">
 			<div class="card-content">
 				<ul>
-					<li>Muqueca de camarão (1x) R$30,00</li>
-					<li>Poção de arroz (1x) R$3,00</li>
-					<li>Coca cola 2L (1x) R$4,50</li>
-					<li>Suco de fruta 1L (1x) R$3,00</li>
+					<li ng-repeat="item in order.items">{{item}}</li>
 				</ul>
 			</div>
 			<div class="card-action">
-				TOTAL: <span class="amber-text">R$40,50</span>
+				TOTAL: <span class="amber-text">{{order.amount | finance:'R$'}}</span>
 				<div class="right">
-					<i class="material-icons left no-margin">schedule</i> 16:30h
+					<i class="material-icons left no-margin">schedule</i> {{order.createdAt}}
 				</div>
 			</div>
 		</div>
