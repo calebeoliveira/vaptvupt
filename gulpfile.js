@@ -12,12 +12,14 @@ gulp.task('stylus', function() {
 
 gulp.task('angular-app', function() {
 	return gulp.src([
+			'resources/angular/modules/*.js',
 			'resources/angular/run.js',
 			'resources/angular/config.js',
 			'resources/angular/directives/*.js',
 			'resources/angular/factories/*.js',
 			'resources/angular/services/*.js',
-			'resources/angular/controllers/*.js'
+			'resources/angular/controllers/*.js',
+			'bower_components/angular-input-masks/angular-input-masks-standalone.min.js'
 		])
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest('public/js'));

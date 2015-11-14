@@ -8,33 +8,36 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Muqueca de camarão</td>
-			<td>R$30,00</td>
-			<td>
-				<a href="" class="waves-effect waves-light btn-flat white-text amber">editar</a>
-			</td>
-		</tr>
-		<tr>
-			<td>Poção de arroz</td>
-			<td>R$3,00</td>
-			<td>
-				<a href="" class="waves-effect waves-light btn-flat white-text amber">editar</a>
-			</td>
-		</tr>
-		<tr>
-			<td>Coca Cola 2L</td>
-			<td>R$4,50</td>
-			<td>
-				<a href="" class="waves-effect waves-light btn-flat white-text amber">editar</a>
-			</td>
-		</tr>
-		<tr>
-			<td>Suco de fruta 1L</td>
-			<td>R$3,00</td>
-			<td>
-				<a href="" class="waves-effect waves-light btn-flat white-text amber">editar</a>
-			</td>
+		<tr ng-repeat="product in products">
+			<td>{{product.name}}</td>
+			<td>{{product.price | finance:'R$'}}</td>
+			<td><a ng-click="setEditProduct($index)" href="#editProduct" modal class="waves-effect waves-light btn-flat white-text amber">editar</a></td>
 		</tr>
 	</tbody>
 </table>
+
+<div id="editProduct" class="modal">
+	<div class="modal-content">
+		<h4>Editar produto</h4>
+		<div class="row">
+			<div class="col m12 input-field">
+				<input type="text" id="pName" ng-model="editProduct.name" ng-disabled="intentDelete">
+				<label for="pName">Nome</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col m4 input-field">
+				<input type="text" id="pPrice" ng-model="editProduct.price" ng-disabled="intentDelete" ui-money-mask>
+				<label for="pPrice">Preço</label>
+			</div>
+			<div class="col m4 offset-m4 center">
+				<a class="waves-effect waves-light red white-text btn-flat" ng-click="makeDeleteIntent()">excluir produto</a>
+				<small ng-show="intentDelete">Salve para concluir a exclusão</small>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveEdit()">salvar</a>
+		<a class="modal-action modal-close waves-effect waves-red btn-flat">cancelar</a>
+	</div>
+</div>
