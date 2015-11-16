@@ -18,8 +18,7 @@ gulp.task('angular-app', function() {
 			'resources/angular/directives/*.js',
 			'resources/angular/factories/*.js',
 			'resources/angular/services/*.js',
-			'resources/angular/controllers/*.js',
-			'bower_components/angular-input-masks/angular-input-masks-standalone.min.js'
+			'resources/angular/controllers/*.js'
 		])
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest('public/js'));

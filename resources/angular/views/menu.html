@@ -1,20 +1,32 @@
 <h4><i class="material-icons">view_list</i> Cardápio</h4>
-<table class="highlight">
-	<thead>
-		<tr>
-			<th>Produto</th>
-			<th>Preço</th>
-			<th>Ações</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="product in products">
-			<td>{{product.name}}</td>
-			<td>{{product.price | finance:'R$'}}</td>
-			<td><a ng-click="setEditProduct($index)" href="#editProduct" modal class="waves-effect waves-light btn-flat white-text amber">editar</a></td>
-		</tr>
-	</tbody>
-</table>
+<div class="row">
+	<div class="col m12" ng-if="products.length == 0">
+		<div class="card grey lighten-4">
+			<div class="card-content grey-text center">
+				<span class="card-title">Vamos lá!</span>
+				<p>Adicione seu primeiro produto clicando no "+".</p>
+			</div>
+		</div>
+	</div>
+	<div class="col m12" ng-show="products.length > 0">
+		<table class="highlight">
+			<thead>
+				<tr>
+					<th>Produto</th>
+					<th>Preço</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in products">
+					<td>{{product.name}}</td>
+					<td>{{product.price | finance:'R$'}}</td>
+					<td><a ng-click="setEditProduct($index)" href="#editProduct" modal class="waves-effect waves-light btn-flat white-text amber">editar</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <div id="editProduct" class="modal">
 	<div class="modal-content">
@@ -40,4 +52,32 @@
 		<a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveEdit()">salvar</a>
 		<a class="modal-action modal-close waves-effect waves-red btn-flat">cancelar</a>
 	</div>
+</div>
+
+<div id="addProduct" class="modal">
+	<div class="modal-content">
+		<h4>Adicionar produto</h4>
+		<div class="row">
+			<div class="col m12 input-field">
+				<input type="text" id="paName" ng-model="addProduct.name">
+				<label for="paName">Nome</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col m4 input-field">
+				<input type="text" id="paPrice" ng-model="addProduct.price" ui-money-mask>
+				<label for="paPrice">Preço</label>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="saveAdd()">salvar</a>
+		<a class="modal-action modal-close waves-effect waves-red btn-flat">cancelar</a>
+	</div>
+</div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+	<a class="btn-floating btn-large red darken-4 waves-effect waves-light" href="#addProduct" modal>
+		<i class="large material-icons">add</i>
+	</a>
 </div>

@@ -1,14 +1,20 @@
-vv.controller('MenuCtrl', function($scope) {
+vv.controller('MenuCtrl', function($scope, $http, menuEntryList) {
 
-	$scope.products = [
-		{id: 4, name: 'Muqueca de camarão', price: 30},
-		{id: 5, name: 'Poção de arroz', price: 3},
-		{id: 7, name: 'Coca Cola 2L', price: 4.5},
-		{id: 8, name: 'Suco de fruta 1L', price: 3}
-	];
+	$scope.products = menuEntryList.data;
 
 	$scope.editProduct = null;
+	$scope.addProduct = {
+		name: null,
+		price: null
+	};
 	$scope.intentDelete = null;
+
+	var updateProducts = function() {
+		$http.get('/api/menu/entries')
+		.then(function (res) {
+			$scope.products = res.data;
+		});
+	};
 
 	$scope.setEditProduct = function(i) {
 		$scope.intentDelete = null;
@@ -25,9 +31,37 @@ vv.controller('MenuCtrl', function($scope) {
 
 	$scope.saveEdit = function() {
 		if($scope.intentDelete) {
-			Materialize.toast('Produto excluído!', 4000);
+			$http.delete('/api/menu/entries/'+$scope.editProduct.id)
+			.then(function (res) {
+				updateProducts();
+				Materialize.toast('Produto excluído!', 4000);
+			}, function (res) {
+				Materialize.toast('Falha ao excluir produto', 4000);
+			});
 		} else {
-			Materialize.toast('Produto atualizado!', 4000);
+			$http.put('/api/menu/entries/'+$scope.editProduct.id, {product: $scope.editProduct})
+			.then(function (res) {
+				updateProducts();
+				Materialize.toast('Produto atualizado!', 4000);
+			}, function (res) {
+				Materialize.toast('Falha ao atualizar produto', 4000);
+			});
 		}
+	};
+
+	$scope.saveAdd = function() {
+		$http.post('/api/menu/entries', {product: $scope.addProduct})
+		.then(function (res) {
+
+			updateProducts();
+			Materialize.toast('Produto criado!', 4000);
+
+			$scope.addProduct = {
+				name: null,
+				price: null
+			};
+		}, function (res) {
+			Materialize.toast('Erro ao criar produto!', 4000);
+		});
 	};
 });

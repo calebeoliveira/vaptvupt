@@ -1,15 +1,8 @@
-vv.controller('SellCtrl', function($scope) {
+vv.controller('SellCtrl', function($scope, $http, menuEntryList) {
 	$scope.amount = 0;
-	$scope.orderItems = [
-		// {id: 4, name: 'Muqueca de camarão', quantity: 1, price: 30}
-	];
+	$scope.orderItems = [];
 
-	$scope.products = [
-		{id: 4, name: 'Muqueca de camarão', price: 30},
-		{id: 5, name: 'Poção de arroz', price: 3},
-		{id: 7, name: 'Coca Cola 2L', price: 4.5},
-		{id: 8, name: 'Suco de fruta 1L', price: 3}
-	];
+	$scope.products = menuEntryList.data;
 	$scope.selectedProduct = $scope.products[0];
 
 	var makeAmount = function() {
@@ -54,8 +47,12 @@ vv.controller('SellCtrl', function($scope) {
 	};
 
 	$scope.finishOrder = function() {
-		Materialize.toast('Pedido realizado!', 4000);
-		$scope.clearOrder();
+		$http.post('/api/orders', {orderItems: $scope.orderItems})
+		.then(function (res) {
+			Materialize.toast('Pedido realizado!', 4000);
+			$scope.clearOrder();
+		}, function (res) {
+			Materialize.toast('Falha ao criar pedido', 4000);
+		});
 	};
-
 });

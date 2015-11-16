@@ -9,18 +9,33 @@ vv.config(function($stateProvider, $urlRouterProvider) {
 	.state('sell', {
 		url: '/sell',
 		templateUrl: '/views/sell.html',
-		controller: 'SellCtrl'
+		controller: 'SellCtrl',
+		resolve: {
+			menuEntryList: function($http) {
+				return $http.get('/api/menu/entries');
+			}
+		}
 	})
 
 	.state('orders', {
 		url: '/orders',
 		templateUrl: '/views/orders.html',
-		controller: 'OrdersCtrl'
+		controller: 'OrdersCtrl',
+		resolve: {
+			ordersList: function($http) {
+				return $http.get('/api/orders');
+			}
+		}
 	})
 
 	.state('menu', {
 		url: '/menu',
 		templateUrl: '/views/menu.html',
-		controller: 'MenuCtrl'
+		controller: 'MenuCtrl',
+		resolve: {
+			menuEntryList: function($http) {
+				return $http.get('/api/menu/entries');
+			}
+		}
 	});
 });
